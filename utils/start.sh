@@ -6,18 +6,14 @@ read -e -p "Enter the path to the log directory: " -i "/home/arya/apps/" LOGPATH
 read -e -p "Enter comma separated recepient email-ids:" EMAIL
 
 CURRENT_DIR="`pwd`"
-time=`date +%Y%m%d`
-echo $time
+time=`date +%Y-%m-%d` 
 COMMAND="python $CURRENT_DIR/start.sh 2014-08-01T21:12:12 2014-08-01T23:12:12 $LOGPATH $EMAIL"
 
 JOB="*/2+1 * * * * $COMMAND"
 
 #cat <(fgrep -i -v "$COMMAND" <(crontab -l)) <(echo "$JOB") | crontab -
 
-exit_status = `bash $CURRENT_DIR/logrotate.sh  $CURRENT_DIR/access.log $CURRENT_DIR/ziplog`
-echo "I am here "
-echo $exit_status
-
+`/bin/bash logrotate.sh  access.log ziplog` 
 
 #read -e -p "Select time structure: dof = date of month[1-31] ;mon= month[1-12] ; dow = date of week[0-6] ; own =Complete cronjob pattern * * * * * *:    
 #-- min 

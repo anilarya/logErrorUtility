@@ -26,17 +26,17 @@ if [ "$2" = "" ]; then
 else
 	dest=$2
 	if [ ! -d $dest ]; then
-		echo "The file destonation you gave does not exist. We are going to stop now." 
+		echo "The file destination you gave does not exist. We are going to stop now." 
 		exit 1
 	fi
 fi
  
-timestamp=`date +%Y-%m-%d`
+timestamp=`date +%Y:%m:%d`
 newlogfile=$logfile.$timestamp
  
 if [ -f $dest/$newlogfile.zip ]; then
 	echo $newlogfile.zip "already exists. I changed the filename to prevent data loss."
-	extra=$(date +"%H.%M.%S")  
+	extra=$(date +"%H:%M:%S")  
 	newlogfile=$newlogfile.$extra
 	echo
 	echo "The name of the new rotated logfile is now:"
@@ -46,7 +46,9 @@ if [ -f $dest/$newlogfile.zip ]; then
 fi
  
 cat $logfile > $dest/$newlogfile
-> $logfile
+
+#Empty logfile : Ready to accept another log
+#> $logfile
  
 echo
 echo "I have copied the information from:"
@@ -55,7 +57,7 @@ echo $(pwd)/$logfile
 echo "----------------- TO ----------------"
 echo $dest/$newlogfile.zip
 echo "====================================="
-echo "Original log file is now blank and ready to accept more logs."
+echo "Original log file is not blank now and ready to accept more logs."
 touch $logfile
 /usr/bin/zip -m $dest/$newlogfile.zip $dest/$newlogfile
 
