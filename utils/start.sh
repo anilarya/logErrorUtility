@@ -7,13 +7,14 @@ read -e -p "Enter comma separated recepient email-ids:" EMAIL
 
 CURRENT_DIR="`pwd`"
 time=`date +%Y-%m-%d` 
-COMMAND="python $CURRENT_DIR/start.sh 2014-08-01T21:12:12 2014-08-01T23:12:12 $LOGPATH $EMAIL"
-
+COMMAND="python $CURRENT_DIR/utils/utils.py 2014-08-01T21:12:12 2014-08-01T23:12:12 $LOGPATH $EMAIL"
 JOB="*/2+1 * * * * $COMMAND"
 
 #cat <(fgrep -i -v "$COMMAND" <(crontab -l)) <(echo "$JOB") | crontab -
 
-`/bin/bash logrotate.sh  access.log ziplog` 
+COMMAND1="bash $CURRENT_DIR/utils/logrotate.sh  $CURRENT_DIR/utils/access.log"
+JOB1="*/2+1 * * * * $COMMAND1"
+cat <(fgrep -i -v "$COMMAND1" <(crontab -l)) <(echo "$JOB1") | crontab -
 
 #read -e -p "Select time structure: dof = date of month[1-31] ;mon= month[1-12] ; dow = date of week[0-6] ; own =Complete cronjob pattern * * * * * *:    
 #-- min 

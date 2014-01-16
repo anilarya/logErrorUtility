@@ -5,7 +5,7 @@ if [ "$1" = "" ]; then
 	echo "ERROR: You did not input the log file name."
 	exit 1
 fi
- 
+echo $1
 logfile=$1
  
 ## Check to make sure the input file is real.
@@ -31,7 +31,7 @@ else
 	fi
 fi
  
-timestamp=`date +%Y:%m:%d`
+timestamp=`date +%Y:%m:%d` 
 newlogfile=$logfile.$timestamp
  
 if [ -f $dest/$newlogfile.zip ]; then
@@ -44,20 +44,38 @@ if [ -f $dest/$newlogfile.zip ]; then
 	echo $newlogfile.zip
 	echo "-------------------------------------"
 fi
- 
-cat $logfile > $dest/$newlogfile
 
-#Empty logfile : Ready to accept another log
-#> $logfile
- 
-echo
-echo "I have copied the information from:"
-echo "====================================="
-echo $(pwd)/$logfile
-echo "----------------- TO ----------------"
-echo $dest/$newlogfile.zip
-echo "====================================="
-echo "Original log file is not blank now and ready to accept more logs."
-touch $logfile
-/usr/bin/zip -m $dest/$newlogfile.zip $dest/$newlogfile
+if [ "$2" = "" ]; then 
+    cat $logfile > $dest/$newlogfile
 
+    #Empty logfile : Ready to accept another log
+    #> $logfile
+ 
+    echo
+    echo "I have copied the information from:"
+    echo "====================================="
+    echo $(pwd)/$logfile
+    echo "----------------- TO ----------------"
+    echo $dest/$newlogfile.zip
+    echo "====================================="
+    echo "Original log file is not blank now and ready to accept more logs."
+    touch $logfile
+    /usr/bin/zip -m $dest/$newlogfile.zip $dest/$newlogfile
+else
+    cat $logfile > $newlogfile
+
+    #Empty logfile : Ready to accept another log
+    #> $logfile
+ 
+    echo
+    echo "I have copied the information from:"
+    echo "====================================="
+    echo  $logfile
+    echo "----------------- TO ----------------"
+    echo  $newlogfile.zip
+    echo "====================================="
+    echo "Original log file is not blank now and ready to accept more logs."
+    touch $logfile
+    /usr/bin/zip -m $newlogfile.zip $newlogfile
+    
+fi
