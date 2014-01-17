@@ -1,5 +1,6 @@
 '''
 Created on 8th Jan 2014
+IT does logparsing and sends error messages from ngnix logs daily
 @author: Anil Arya 
 '''
 
