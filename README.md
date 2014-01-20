@@ -18,7 +18,7 @@ Installtion steps :
 5. This will set cronjob to run utils.py script to parse logs and sends mail about log errors.
 
 
-Pre installation steps : 
+Pre installation steps -[ Creation of distribution Packages ]  
 
 1.Make setup.py file in parent project directory. 
 
