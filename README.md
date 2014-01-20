@@ -5,6 +5,8 @@ logErrorUtility
 Python Distutils package to fire  nginx log errors regulary at x interval of time daily.
 
 Download .tar.gz file from link :    https://github.com/anilarya/logErrorUtility/blob/master/utils/logparser-utility-1.0.tar.gz
+
+
 Installtion steps : 
 
 1. Run [ $tar -xzvf logparser-utility-1.0.tar.gz] to extract .tar.gz files in current directory
@@ -18,7 +20,7 @@ Installtion steps :
 5. This will set cronjob to run utils.py script to parse logs and sends mail about log errors.
 
 
-Pre installation steps : 
+Pre installation steps -[ Creation of distribution Packages ]  
 
 1.Make setup.py file in parent project directory. 
 
