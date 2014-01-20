@@ -18,10 +18,10 @@ from collections import defaultdict
 from fabric.api import * 
 import template
 
+
 config = ConfigParser.RawConfigParser()
-config.read('log_config.cfg')
+config.read('utils/log_config.cfg')
 status = config.get("config_use", "status")
-print status
 
 SMTP_CONF = {
              "MAIL_ENABLE": False,
@@ -192,6 +192,9 @@ if __name__ == "__main__":
             recipient_email = config.get("local", "mailto")
             path = config.get("local", "logpath")
             get_error_notification(st_timestamp, en_timestamp, recipient_email, path)
+         
+         else : 
+            pass
         
         
         

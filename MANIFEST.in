@@ -1,1 +1,1 @@
-recursive-include utils *.zip  *.sh  *.log
+recursive-include utils *.zip  *.sh  *.log *.cfg

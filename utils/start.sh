@@ -1,5 +1,4 @@
-#!/bin/bash
-#Use link for logRotation : http://kb.site5.com/cron-jobs/how-to-run-a-script-using-a-cron-job/
+#!/bin/bash 
 #author :  Anil Arya
 
 read -e -p "Enter the path to the log directory: " -i "/var/log/ngnix" LOGPATH

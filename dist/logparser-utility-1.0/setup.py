@@ -1,6 +1,12 @@
+'''
+Utility to create setups for installtion of package  and running post srcript to ask user data
+#author :  Anil Arya
+
+'''
 from distutils.core import setup 
 from distutils.command.install import install as _install
 from subprocess import call
+
 
 
 def _post_install(dir):

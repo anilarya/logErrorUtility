@@ -1,5 +1,6 @@
 '''
 Created on 8th Jan 2014
+IT does logparsing and sends error messages from ngnix logs daily
 @author: Anil Arya 
 '''
 
@@ -10,11 +11,17 @@ import datetime
 import sys 
 import fnmatch
 import gzip 
+import ConfigParser
+import io
 from email.mime.text import MIMEText
 from collections import defaultdict 
 from fabric.api import * 
 import template
 
+
+config = ConfigParser.RawConfigParser()
+config.read('utils/log_config.cfg')
+status = config.get("config_use", "status")
 
 SMTP_CONF = {
              "MAIL_ENABLE": False,
@@ -174,4 +181,23 @@ def get_error_notification(st_timestamp, en_timestamp, recipient_email, path):
     send_email(fromaddress,valid_recipents_address, content,subject) 
 
 if __name__ == "__main__":
-    handle(sys.argv[1:])
+    status = config.get("config_use", "status")
+    if status == "no":
+        handle(sys.argv[1:])
+    else:
+        mode = config.get("mode", "m")
+        if mode == "local":
+            st_timestamp = config.get("local", "start_timestamp")
+            en_timestamp = config.get("local", "end_timestamp")
+            recipient_email = config.get("local", "mailto")
+            path = config.get("local", "logpath")
+            get_error_notification(st_timestamp, en_timestamp, recipient_email, path)
+         
+         else : 
+            pass
+        
+        
+        
+        
+        
+    

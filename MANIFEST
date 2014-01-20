@@ -2,7 +2,9 @@
 README.txt
 setup.py
 utils/.zip
+utils/__init__.py
 utils/fetch_logs.sh
+utils/log_config.cfg
 utils/logrotate.sh
 utils/logrotate2.sh
 utils/start.sh
