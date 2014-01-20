@@ -19,9 +19,8 @@ from fabric.api import *
 import template
 
 
-config = ConfigParser.RawConfigParser()
-config.read('utils/log_config.cfg')
-status = config.get("config_use", "status")
+
+ 
 
 SMTP_CONF = {
              "MAIL_ENABLE": False,
@@ -29,8 +28,8 @@ SMTP_CONF = {
              "MOCK_MAIL_RECIPIENTS": [],
              "SERVER":"smtp.gmail.com",
              "PORT":587,
-             "USERNAME":"wspalerts@hmadev.com",
-             "PASSWORD":"w5p4l3rt5"
+             "USERNAME":"logparserUtility@gmail.com",
+             "PASSWORD":"log12345"
              }
              
 def handle(*args, **options):
@@ -193,7 +192,7 @@ if __name__ == "__main__":
             path = config.get("local", "logpath")
             get_error_notification(st_timestamp, en_timestamp, recipient_email, path)
          
-         else : 
+        else : 
             pass
         
         
