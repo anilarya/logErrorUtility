@@ -14,8 +14,8 @@ SMTP_CONF = {
              "MOCK_MAIL_RECIPIENTS": [],
              "SERVER":"smtp.gmail.com",
              "PORT":587,
-             "USERNAME":"aryaanil280@gmail.com",
-             "PASSWORD":"mo900707"
+             "USERNAME":"logparserUtility@gmail.com",
+             "PASSWORD":"log12345"
              }
 
 def send_email(fromaddress, toaddresses, content, filename , subject = "", ):
