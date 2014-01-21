@@ -1,5 +1,12 @@
 import render
 import mail
+import tempfile
+import os
+
+def get_temp_file():
+    fd, filename = tempfile.mkstemp() 
+    return fd, filename
+    
 
 def get_count_dict() : 
     count = {
@@ -23,8 +30,10 @@ def get_count_dict() :
          }
     return count
 
-def get_count_information(count, request):
+def get_count_information(count, fd, request):
     if  request['status'] >='500' and request['status'] < '600':
+        os.write(fd, str(request))
+        os.write(fd, '\n\n')
         count["5xx"]['5xx_Counts'] += 1 
     elif  request['status'] >='400'and request['status'] < '500':
         count["4xx"]['4xx_Counts'] += 1  
@@ -32,7 +41,7 @@ def get_count_information(count, request):
         count["2xx"]['2xx_Counts'] += 1
         
     count['total']['total_Count'] += 1
-    return count
+    return count,  fd
 
 
 def report_generate(count_dict, start_timestamp):
@@ -46,7 +55,7 @@ def report_generate(count_dict, start_timestamp):
     
     return content,subject         
 
-def send_report(valid_recipents_address,content,subject):
+def send_report(valid_recipents_address, content, subject, filename):
     fromaddress = mail.SMTP_CONF["USERNAME"]
-    mail.send_email(fromaddress,valid_recipents_address, content,subject)
+    mail.send_email(fromaddress, valid_recipents_address, content, filename, subject)
     

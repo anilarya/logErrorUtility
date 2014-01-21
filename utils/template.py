@@ -29,12 +29,12 @@ def email_content_for_error_count():
                 </tr>
               </tbody> 
             </table>
-            <br>
-            <hr>
+            <br> 
             <br>
             <div align="center"> <strong>Error PI-CHART</strong><br>
-            <img src="https://chart.googleapis.com/chart?chs=350x200&chd=t:%d,%d,%d&cht=p&chl= 5xx-Count|4xx-Count|2xx-Count"/>
-             </div>  
+            <img src="https://chart.googleapis.com/chart?chs=350x200&chd=t:%d,%d,%d&cht=p&chl= 5xx-Count|4xx-Count|2xx-Count&chco=FF0000|FFA500|00FF00 "/>
+             </div><br>
+             <strong>PFA 5xx log errors :</strong>  
           </body>
         </html>
         """
