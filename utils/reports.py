@@ -39,7 +39,6 @@ def get_count_information(count, fd, request):
         count["4xx"]['4xx_Counts'] += 1  
     elif  request['status'] >='200' and request['status'] < '300' :
         count["2xx"]['2xx_Counts'] += 1
-        
     count['total']['total_Count'] += 1
     return count,  fd
 
