@@ -7,7 +7,6 @@ def get_temp_file():
     fd, filename = tempfile.mkstemp() 
     return fd, filename
     
-
 def get_count_dict() : 
     count = {
                  "4xx" :
@@ -40,7 +39,7 @@ def get_count_information(count, fd, request):
     elif  request['status'] >='200' and request['status'] < '300' :
         count["2xx"]['2xx_Counts'] += 1
     count['total']['total_Count'] += 1
-    return count,  fd
+    return count, fd
 
 
 def report_generate(count_dict, start_timestamp):

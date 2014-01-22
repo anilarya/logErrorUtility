@@ -18,8 +18,7 @@ SMTP_CONF = {
              "PASSWORD":"log12345"
              }
 
-def send_email(fromaddress, toaddresses, content, filename , subject = "", ):
-    dir = settings.PROJECT_DIR          
+def send_email(fromaddress, toaddresses, content="", filename=None , subject = "", ):         
     me = fromaddress
     you = toaddresses
     smtp_server = SMTP_CONF["SERVER"]
@@ -33,11 +32,12 @@ def send_email(fromaddress, toaddresses, content, filename , subject = "", ):
     html_content = MIMEText(content, 'html', _charset='utf-8') 
     msg.attach(html_content)
     part = MIMEBase('application', "octet-stream")
-    f = filename
-    part.set_payload( open(f,"rb").read() )
-    Encoders.encode_base64(part)
-    part.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(f))
-    msg.attach(part)                   
+    f = filename 
+    if os.path.getsize(f) !=0 : 
+        part.set_payload( open(f,"rb").read() )
+        Encoders.encode_base64(part)
+        part.add_header('Content-Disposition', 'attachment; filename="%s"' % os.path.basename(f))
+        msg.attach(part)                   
     reciepents = toaddresses.split(',') 
     server = smtplib.SMTP(smtp_server,smtp_port, local_hostname='logparserUtility@gmail.com') 
     server.starttls()
@@ -46,7 +46,3 @@ def send_email(fromaddress, toaddresses, content, filename , subject = "", ):
     server.quit()
     os.remove(filename)      
     return True
-
-
-
-

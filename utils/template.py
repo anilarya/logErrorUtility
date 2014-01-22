@@ -21,7 +21,7 @@ def email_content_for_error_count():
               </thead>
               <tbody>
                 <tr border = 1px black>
-                  <td>Project_name</td>
+                  <td>Lithium</td>
                   <th>%d</th>
                   <td>%d </td>
                   <td>%d</td>
