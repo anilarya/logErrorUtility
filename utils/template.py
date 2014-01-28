@@ -21,7 +21,7 @@ def email_content_for_error_count():
               </thead>
               <tbody>
                 <tr border = 1px black>
-                  <td>Lithium</td>
+                  <td>%s</td>
                   <th>%d</th>
                   <td>%d </td>
                   <td>%d</td>
@@ -34,7 +34,7 @@ def email_content_for_error_count():
             <div align="center"> <strong>Error PI-CHART</strong><br>
             <img src="https://chart.googleapis.com/chart?chs=350x200&chd=t:%d,%d,%d&cht=p&chl= 5xx-Count|4xx-Count|2xx-Count&chco=FF0000|FFA500|00FF00 "/>
              </div><br>
-             <strong>PFA 5xx log errors :</strong>  
+             <strong>PFA attched files for 5xx log errors and top 20 slowest URLs >= 2.0 ms :</strong>  
           </body>
         </html>
         """

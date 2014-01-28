@@ -3,20 +3,35 @@ import os
 
 PROJECT_DIR = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
 
-#path where log is available for parsing
+#===================================================user-Info========================================
+#name of your project
+project = 'Lithium'
+
+#path where log is available for parsing, having extention: ".log"
 logpath = '/var/log/ngnix'
+
+#For example  :  apche, ngnix etc
+app_web_server = 'apache' 
 
 #mailing lists
 recipient_email =  'anil.kumar@hashedin.com'
 
-#settings for remote  
-pemfile = '~/.ssh/Platform_Dev.pem'
-gateway = 'ec2-user@gateway.hmadev.com' 
+ 
+#yours SMTP configurations
+SMTP_CONF = {
+             "MAIL_ENABLE": False,
+             "MAIL_RECIPIENTS_OVERRIDE": False,
+             "MOCK_MAIL_RECIPIENTS": [],
+             "SERVER":"smtp.gmail.com",
+             "PORT":587,
+             "USERNAME":"logparserUtility@gmail.com",
+             "PASSWORD":"log12345"
+             }
 
-#apche, ngnix etc
-app_web_server = 'apache'   
+#===================================================END user-Info===================================== 
 
-#log regular expressions for application web server 
+
+#log regular-expressions for application web server 
 ngnix_regex = '^(?P<hostname>[\w.]*) (?P<clientip>[\d.]+) (?P<user>[\w-]+) (?P<application>[\w-]+) '+\
                         '(?P<request>\[\d+/\w+/\d+\:\d+\:\d+\:\d+[ \t]\-\d+\]) "(?P<method>GET|POST|PUT|DELETE|HEAD|TRACE|OPTIONS) (?P<url>.*?)'+\
                         ' (?P<protocol>HTTP/1.[01])" (?P<status>\d+) (?P<bytes_sent>\d+) (?P<request_time>[\d.-]+) (?P<upstream_response_time>[\d.-]+)'+\
