@@ -6,7 +6,6 @@ import fnmatch
 import gzip  
 import io
 import reports
-import settings
 from urlparse import urlsplit, parse_qsl
 import dateutil.parser 
 from collections import Counter
@@ -14,9 +13,15 @@ import operator
 import pandas as pd
 import numpy as np
 from pandas import Series, DataFrame, Panel
-
+from datetime import date, timedelta
 
 unique_set = Counter()
+ 
+time  = datetime.datetime.now() -timedelta(days=9)
+start_time = time.strftime('%d/%b/%Y:00:00:00')
+end_time = time.strftime('%d/%b/%Y:23:59:59') 
+start_timestamp = datetime.datetime.strptime(str(start_time), '%d/%b/%Y:%H:%M:%S')
+end_timestamp = datetime.datetime.strptime(str(end_time), '%d/%b/%Y:%H:%M:%S')
 
 def lines_from_dir(filepat, dirname):
     '''
@@ -124,37 +129,41 @@ def get_general_loginfo(request, count_dict,  log_list, fd):
     log_list.append(request)
     time = request["request"].split(" ")[0].split("[")[1] 
     time = datetime.datetime.strptime(str(time), '%d/%b/%Y:%H:%M:%S')
-    count_dict = reports.get_count_information(count_dict, fd, request)
-    urls_count_dict = slow_urls_and_their_counts(request)
-    count_dict  = ip_requests(log_list, count_dict)   #Data analysis using python pandas
-    return count_dict , urls_count_dict , time
+    if time >= start_timestamp and  time <= end_timestamp :
+        count_dict = reports.get_count_information(count_dict, fd, request)
+        urls_count_dict = slow_urls_and_their_counts(request)
+        count_dict  = ip_requests(log_list, count_dict)   #Data analysis using python pandas
+        return count_dict , urls_count_dict
+    else : 
+        return count_dict, count_dict["slow_urls_count"]
+        
 
 def parse(wwwlog, regex, count_dict, fd):
     '''
     Utility to parse logs and return errors_count dictionary
     '''
     log_list = []
-    log_re = re.compile(regex)
+    urls_count_dict = None
+    log_re = re.compile(regex) 
     for line in wwwlog:
         m = log_re.match(line) 
         if not m:
             continue
         request =  m.groupdict()
-        count_dict, urls_count_dict , time = get_general_loginfo(request, count_dict, log_list, fd)
-    count_dict["slow_urls_count"] = get_sorted_values(urls_count_dict)
-    return count_dict, time
+        count_dict, urls_count_dict = get_general_loginfo(request, count_dict, log_list, fd)
+    if urls_count_dict :
+        count_dict["slow_urls_count"] = get_sorted_values(urls_count_dict)
+    return count_dict
 
 
 def get_error_notification(path, regex):
     ''' A function to parse logs  and return count_dictionary of log errors 
     '''
-    wwwlog = lines_from_dir('*.log1',path)
+    wwwlog = lines_from_dir('*.gz',path)
     count_dict = reports.get_count_dict()
-    time = datetime.datetime.now()
+    count_dict["slow_urls_count"] = None
+    count_dict['ips_fd'] = None
     fd, temp_filename = reports.get_temp_file() 
-    count_dict, time= parse(wwwlog, regex, count_dict, fd)
+    count_dict = parse(wwwlog, regex, count_dict, fd)
     os.close(fd)
-    return count_dict, temp_filename, time
-
-if __name__=="__main__":
-    pass
+    return count_dict, temp_filename, start_timestamp

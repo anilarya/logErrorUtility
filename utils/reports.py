@@ -43,12 +43,14 @@ def get_count_information(count, fd, request):
     return count
 
 def write_urls_count(fd2, count_dict):
-    os.write(fd2, '=============================Slow urls with number of Hits===============================\n\n')
-    for urls in count_dict["slow_urls_count"]:
-        os.write(fd2, str(urls))
-        os.write(fd2,'\n')
-    os.write(fd2, "\n======================clientIps and Number of requests made by same Ips==================\n\n")
-    os.write(fd2, str(count_dict["ips_fd"]))
+    if count_dict["slow_urls_count"] :
+        os.write(fd2, '=============================Slow urls with number of Hits===============================\n\n')
+        for urls in count_dict["slow_urls_count"]:
+            os.write(fd2, str(urls))
+            os.write(fd2,'\n')
+    if count_dict["ips_fd"] :
+        os.write(fd2, "\n======================clientIps and Number of requests made by same Ips==================\n\n")
+        os.write(fd2, str(count_dict["ips_fd"]))
 
 def report_generate(count_dict, start_timestamp):
     if count_dict['4xx']["4xx_Counts"] != 0 or count_dict['5xx']["5xx_Counts"] != 0:
@@ -61,7 +63,7 @@ def report_generate(count_dict, start_timestamp):
     
     return content,subject         
 
-def send_report(valid_recipents_address, content, subject, filename):
+def send_report(valid_recipents_address, content, subject, filename, project):
     fromaddress = settings.SMTP_CONF["USERNAME"]
-    mail.send_email(fromaddress, valid_recipents_address, content, filename, subject)
+    mail.send_email(fromaddress, valid_recipents_address, content, filename, subject, project)
     

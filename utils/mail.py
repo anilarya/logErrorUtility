@@ -9,7 +9,7 @@ import settings
 import tempfile
 
 
-def send_email(fromaddress, toaddresses, content="", filenames=None , subject = ""):   
+def send_email(fromaddress, toaddresses, content="", filenames=None , subject = "", project = ""):   
     '''
     Utility to send mail to given recipients address having attached files and error pi-charts
     '''      
@@ -20,7 +20,7 @@ def send_email(fromaddress, toaddresses, content="", filenames=None , subject = 
     smtp_password = settings.SMTP_CONF["PASSWORD"]
     smtp_port = settings.SMTP_CONF["PORT"] 
     msg = MIMEMultipart()
-    msg['Subject'] ='[ %s ] %s'% (settings.project, subject)
+    msg['Subject'] ='[ %s ] %s'% (project, subject)
     msg['From'] = me        
     msg['To'] =  you 
     html_content = MIMEText(content, 'html', _charset='utf-8') 
