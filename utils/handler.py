@@ -42,8 +42,7 @@ def handle(*args, **options):
     path =  args[0][2]
     server = args[0][3]  
     mailTo = args[0][4]
-    get__aws_logs(env_id)
-    print env_name, env_id, mailTo
+    get__aws_logs(env_id) 
     count_dict, temp_filename1, time = logparser.get_error_notification(path, get_log_regex(server))
     return count_dict, temp_filename1, time , mailTo, env_name ,env_id
 
