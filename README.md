@@ -9,7 +9,7 @@
                       -ClientIPs with number of requests made .
                       -Average Number of requests per Hour.
 
-2.  Project Name , Logpath,  Name of App web server, Recipient-email-id , SMTP settings.
+2. Simply modify settings.py file to cinfigure user information like Project Name , Logpath,  Name of App web server, Recipient-email-id , SMTP settings.
    
 ====================================OR==================================================
 
