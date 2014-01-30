@@ -1,41 +1,28 @@
-logErrorUtility
-===============
- 
+1. Use this logparser-utility for following reasons : 
+    *To see 5xx errors, 4xx errors and 2xx  counts  from log file  in  a tabular format.
+    *To analyze these errors in pi-charts.
+    *To see all 5xx errors in attached file.
+    *To see general log info in other txt file. Like --
+        -Slow urls > 2.0 ms and number of hits.
+        -ClientIPs with number of requests made .
+        -Average Number of requests per Hour.
 
-Python Distutils package to fire  nginx log errors regulary at x interval of time daily.
+2. Need to update only one file settings.py for log configuration purpose. Like  : 
+    Project Name , Logpath,  Name of App web server, Recipient-email-id , SMTP settings.
+                                            or
+    simply use following command line arguments without looking into settings.py file
 
-Download .tar.gz file from link :    
+3. After making modification in settings.py file , Run following command to run handler.py file to    
+    parse log files to fetch general log info : 
+    
+===============================================================================
+   $ python utils/handler.py   # It takes user info from settings.py   
 
-https://github.com/anilarya/logErrorUtility/blob/master/logparser-utility-1.0.tar.gz
+------------------------------or from Command Line Arguments-----------------------------------------------
+   $ python handler.py Lithium-dashboard-Qa  e-xzrtpezf2s  /home/arya/Desktop/log apache  anil.kumar@hashedin.com     
+   
+Arguments explanation :  
+python handler.py <environment_name/projectName-env> <environment-Id> <logpath> <server_name> <mailTo>                                    
+====================================================================================
 
-
-Installtion steps : 
-
-1. Run [ $tar -xzvf logparser-utility-1.0.tar.gz] to extract .tar.gz files in current directory
-
-2. Do [$ cd  logparser-utility.1.0 ] and do [$ ls] , You will see setup.py file and other project directories.
-
-3. Run [$ sudo python setup.py install] 
-
-4. This will run post bash scripts in background to enter details like a) logpath b) email-ids
-
-5. This will set cronjob to run utils.py script to parse logs and sends mail about log errors.
-
-
-Pre installation steps -[ Creation of distribution Packages ]  
-
-1.Make setup.py file in parent project directory. 
-
-What is setup.py?   Refer links :
-http://stackoverflow.com/questions/1471994/what-is-setup-py
-http://docs.python.org/2/distutils/setupscript.html
-
-2. Make MANIFEST.in file to include non-python files or directories in same folder where setup.py exists.
-
-3. Command to create source distribution in current directory :   $ python setup.py sdist 
-
-This will create dist directory in current folder having  logparser-utility.1.0.tar.gz file
-
-4. Do [$ cd dist]  and run [ $tar -xzvf logparser-utility-1.0.tar.gz] to extract .tar.gz files in current directory
-
-5. Do [$ cd  logparser-utility.1.0 ] and do [$ ls] , You will see setup.py file and other project directories.
+4. This sends mail reports to given recipients email-Ids.
