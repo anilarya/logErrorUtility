@@ -11,18 +11,18 @@
 
 2. Simply modify settings.py file to cinfigure user information like Project Name , Logpath,  Name of App web server, Recipient-email-id , SMTP settings.
    
-====================================OR==================================================
+====================================OR=============================
 
 simply use following command line arguments without looking into settings.py file
 
 After making modification in settings.py file , Run following command to run handler.py file to  
     parse log files to fetch general log info : 
     
-=========================================================================================
+===================================================================
 
                     $ python utils/handler.py   # It takes user info from settings.py   
 
-=========================or from Command Line Arguments==================================
+===================or from Command Line Arguments==================
 
                     $ python utils/handler.py Lithium-dashboard-Qa  e-xzrtpezf2s  /home/arya/Desktop/log apache  anil.kumar@hashedin.com     
  
