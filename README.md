@@ -15,7 +15,7 @@
 
 simply use following command line arguments without looking into settings.py file
 
-3.  After making modification in settings.py file , Run following command to run handler.py file to  
+After making modification in settings.py file , Run following command to run handler.py file to  
     parse log files to fetch general log info : 
     
 =========================================================================================
