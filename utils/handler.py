@@ -15,13 +15,13 @@ def get__aws_logs(env_id):
     Get amozon aws logs from simple storage Service data storage and save it to given path
     '''
     conn = S3Connection()
-    bucket = conn.get_bucket('elasticbeanstalk-us-east-1-660104689325')
-    keys = bucket.list(prefix='resources/environments/logs/publish/' + env_id) 
+    bucket = conn.get_bucket(Bucket-Name)
+    keys = bucket.list(prefix=prefix-key + env_id) 
     for key in keys:
         key_name = str(key.key)
         key.last_modified
         filename = key_name.split('/')[-1]
-        path = '/home/arya/Desktop/log/' + filename 
+        path = logpath + filename 
         if '_access_log'  in filename : 
             key.get_contents_to_filename(path)
 
