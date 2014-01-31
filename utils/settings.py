@@ -4,10 +4,10 @@ PROJECT_DIR = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
 
 #===================================================user-Info================================================================
 #name of your project
-project = 'Lithium-Dashboard-Qa'
+project = 'PROJECT -NAME'
 
 #s3 environment _id 
-env_id = 'e-xzrtpezf2s'
+env_id = 'Environment-Id'
 
 #path where log is available for parsing, having extention: ".log"
 logpath = '/var/log/ngnix'
@@ -16,7 +16,7 @@ logpath = '/var/log/ngnix'
 app_web_server = 'apache' 
 
 #mailing lists
-recipient_email =  'anil.kumar@hashedin.com'
+recipient_email =  'anil.kumar@gmail.com,naga@hashedin.com'
 
 #yours SMTP configurations
 SMTP_CONF = {
@@ -25,8 +25,8 @@ SMTP_CONF = {
              "MOCK_MAIL_RECIPIENTS": [],
              "SERVER":"smtp.gmail.com",
              "PORT":587,
-             "USERNAME":"logparserUtility@gmail.com",
-             "PASSWORD":"log12345"
+             "USERNAME":"username",  # for expample@gmail.com
+             "PASSWORD":"password",   #1213
              }
 
 #===================================================END user-Info============================================================== 
