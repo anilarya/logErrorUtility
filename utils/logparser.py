@@ -15,11 +15,10 @@ import numpy as np
 from pandas import Series, DataFrame, Panel
 from datetime import date, timedelta
 
-unique_set = Counter()
- 
-time  = datetime.datetime.now() -timedelta(days=9)
-start_time = time.strftime('%d/%b/%Y:00:00:00')
-end_time = time.strftime('%d/%b/%Y:23:59:59') 
+unique_set = Counter() 
+yester_date  = datetime.datetime.now() - timedelta(days=1)
+start_time = yester_date.strftime('%d/%b/%Y:00:00:00')
+end_time = yester_date.strftime('%d/%b/%Y:23:59:59') 
 start_timestamp = datetime.datetime.strptime(str(start_time), '%d/%b/%Y:%H:%M:%S')
 end_timestamp = datetime.datetime.strptime(str(end_time), '%d/%b/%Y:%H:%M:%S')
 
@@ -131,8 +130,9 @@ def get_general_loginfo(request, count_dict,  log_list, fd):
     time = datetime.datetime.strptime(str(time), '%d/%b/%Y:%H:%M:%S')
     if time >= start_timestamp and  time <= end_timestamp :
         count_dict = reports.get_count_information(count_dict, fd, request)
-        urls_count_dict = slow_urls_and_their_counts(request)
-        count_dict  = ip_requests(log_list, count_dict)   #Data analysis using python pandas
+#        urls_count_dict = slow_urls_and_their_counts(request)    #need response time 
+        urls_count_dict = None
+#        count_dict  = ip_requests(log_list, count_dict)   #Data analysis using python pandas
         return count_dict , urls_count_dict
     else : 
         return count_dict, count_dict["slow_urls_count"]
@@ -156,10 +156,11 @@ def parse(wwwlog, regex, count_dict, fd):
     return count_dict
 
 
-def get_error_notification(path, regex):
-    ''' A function to parse logs  and return count_dictionary of log errors 
+def get_error_notification(path, regex):   #rename method  to _main
+    ''' 
+    A function to parse logs  and return count_dictionary of log errors 
     '''
-    wwwlog = lines_from_dir('*.gz',path)
+    wwwlog = lines_from_dir('*.gz',path) 
     count_dict = reports.get_count_dict()
     count_dict["slow_urls_count"] = None
     count_dict['ips_fd'] = None

@@ -58,8 +58,7 @@ def report_generate(count_dict, start_timestamp):
         content = render.get_email_html_body(start_timestamp, count_dict)
     elif count_dict['4xx']["4xx_Counts"] == 0 and count_dict['5xx']["5xx_Counts"] == 0 :
         subject = "[Daily Status Report]::: No errors  on:  %s " %(start_timestamp ) 
-        content = ""  
-        print "No Error found"
+        content = ""
     
     return content,subject         
 
